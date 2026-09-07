@@ -915,9 +915,46 @@ let target = null;
 const $ = id => document.getElementById(id);
 
 
- 
+/* WELCOME SCREEN */
+
+const exciteButtons = document.querySelectorAll(".excite button");
+const enterButton = $("enter");
+
+exciteButtons.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    exciteButtons.forEach(x => {
+      x.classList.remove("sel");
+    });
+
+    button.classList.add("sel");
+
+  });
+
+});
+
+
+enterButton.addEventListener("click", () => {
+
+  const selected =
+    document.querySelector(".excite button.sel");
+
+  if (!selected) {
+
+    alert("Please select how excited you are first.");
+
+    return;
+
+  }
+
+  $("welcome").classList.add("hide");
+
+});
+
 
 /* ADMINISTRATOR MODAL */
+
 
 $("adminOpen").onclick = e => {
 
