@@ -917,41 +917,41 @@ const $ = id => document.getElementById(id);
 
 /* WELCOME SCREEN */
 
-const exciteButtons = document.querySelectorAll(".excite button");
-const enterButton = $("enter");
+document.addEventListener("DOMContentLoaded", () => {
 
-exciteButtons.forEach(button => {
+  const exciteButtons = document.querySelectorAll(".excite button");
+  const enterButton = document.getElementById("enter");
+  const welcomeScreen = document.getElementById("welcome");
 
-  button.addEventListener("click", () => {
+  exciteButtons.forEach(button => {
 
-    exciteButtons.forEach(x => {
-      x.classList.remove("sel");
+    button.addEventListener("click", () => {
+
+      exciteButtons.forEach(x => {
+        x.classList.remove("sel");
+      });
+
+      button.classList.add("sel");
+
     });
 
-    button.classList.add("sel");
+  });
+
+  enterButton.addEventListener("click", () => {
+
+    const selected =
+      document.querySelector(".excite button.sel");
+
+    if (!selected) {
+      alert("Please select how excited you are first.");
+      return;
+    }
+
+    welcomeScreen.classList.add("hide");
 
   });
 
 });
-
-
-enterButton.addEventListener("click", () => {
-
-  const selected =
-    document.querySelector(".excite button.sel");
-
-  if (!selected) {
-
-    alert("Please select how excited you are first.");
-
-    return;
-
-  }
-
-  $("welcome").classList.add("hide");
-
-});
-
 
 /* ADMINISTRATOR MODAL */
 
