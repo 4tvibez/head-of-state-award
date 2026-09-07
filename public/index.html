@@ -915,31 +915,7 @@ let target = null;
 const $ = id => document.getElementById(id);
 
 
-/* WELCOME SCREEN */
-
-document.querySelectorAll(".excite button").forEach(button => {
-
-  button.onclick = () => {
-
-    document
-      .querySelectorAll(".excite button")
-      .forEach(x => x.classList.remove("sel"));
-
-    button.classList.add("sel");
-
-    $("enter").disabled = false;
-
-  };
-
-});
-
-
-$("enter").onclick = () => {
-
-  $("welcome").classList.add("hide");
-
-};
-
+ 
 
 /* ADMINISTRATOR MODAL */
 
