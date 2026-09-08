@@ -1,1 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Head of State Award Registration</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;color:#08265a;background:#061a40 url('/background.png') center top/cover fixed;min-height:100vh}
+body:after{content:"✦  ·  ✧     ✦   ·   ✧     ✦      ·   ✧";position:fixed;inset:-20px;pointer-events:none;color:#fff;font-size:22px;line-height:120px;letter-spacing:24px;text-shadow:0 0 8px #fff,0 0 20px #ffd34e;opacity:.6;animation:s 8s ease-in-out infinite;z-index:0}
+@keyframes s{50%{transform:translateY(-20px);opacity:.25}}
+@keyframes shine{to{background-position:250% 0}}
+@keyframes pop{from{transform:scale(.96);opacity:0}}
+.wrap{max-width:980px;margin:auto;padding:18px 18px 35px;position:relative;z-index:1}
+.hero{text-align:center;color:#fff}
+.logo{width:220px;height:220px;object-fit:cover;border-radius:50%;border:8px solid #fff;box-shadow:0 0 0 3px #ffd34e,0 0 45px #ffd34e;margin:auto}
+.hero h1{font-size:clamp(35px,7vw,62px);margin:10px 0 0;font-weight:1000;background:linear-gradient(90deg,#fff,#ffd34e,#fff5a6,#ffd34e,#fff);background-size:250%;-webkit-background-clip:text;color:transparent;animation:shine 4s linear infinite}
+.hero h2{margin:2px 0 10px;font-size:clamp(25px,5vw,43px);color:#fff}
+.orn{height:3px;width:75%;margin:auto;background:linear-gradient(90deg,transparent,#ffd34e,#fff,#ffd34e,transparent)}
+.card{margin-top:16px;background:rgba(248,250,255,.93);border:2px solid #ffd34e;border-radius:25px;padding:24px;box-shadow:0 20px 65px #001334aa}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{font-weight:900;font-size:13px;display:block;margin:0 0 6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #b9c4d4;border-radius:9px;font:inherit}
+input[type=file]{background:#fff;cursor:pointer}
+textarea{min-height:80px}
+.ready h3{text-align:center;color:#08265a}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.choices label{padding:17px;text-align:center;border:1px solid #b9c4d4;border-radius:11px;cursor:pointer;background:#fff}
+.choices input{display:none}
+.choices input:checked+label{box-shadow:0 0 0 3px #ffd34e44;border-color:#ffd34e}
+.count{margin-top:16px;padding:16px;border-radius:17px;background:#031b45;color:#fff;border:1px solid #ffd34e}
+.count h3{text-align:center;color:#ffd34e;margin:0 0 12px}
+.countline{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.unit{text-align:center;padding:12px;border:1px solid #078cff;border-radius:10px;box-shadow:0 0 17px #008cff33}
+.unit b{font-size:clamp(27px,5vw,42px);color:#27a6ff;text-shadow:0 0 15px #008cff;display:block}
+.unit small{font-weight:900}
+.event{margin-top:9px;text-align:center;color:#dceaff;font-size:12px}
+button{border:0;border-radius:11px;padding:14px 18px;font-weight:1000;cursor:pointer}
+button:disabled{cursor:not-allowed}
+.submit{display:block;width:min(600px,90%);margin:16px auto 0;background:linear-gradient(90deg,#d79c0d,#fff0a0,#ffd34e,#fff0a0,#d79c0d);background-size:250%;animation:shine 3s linear infinite;font-size:18px}
+.status{text-align:center;margin-top:10px;font-weight:900}
+.welcome{position:fixed;inset:0;z-index:10;background:#031333dd;backdrop-filter:blur(10px);display:grid;place-items:center;padding:18px}
+.welcome.hide{display:none}
+.welcomeBox{max-width:600px;background:#031b45;color:#fff;border:2px solid #ffd34e;border-radius:28px;padding:35px 25px;text-align:center;box-shadow:0 0 60px #ffd34e55;animation:pop .45s ease}
+.wave{font-size:50px}
+.welcomeBox h2{font-size:45px;margin:5px;color:#ffd34e}
+.excite{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.excite button{background:#ffffff12;color:#fff;border:1px solid #ffffff44}
+.excite button.sel{border-color:#ffd34e;background:#ffd34e22}
+.enter{width:100%;margin-top:15px;background:#ffd34e}
+.enter:disabled{opacity:.4}
+.adminLink{position:fixed;right:12px;bottom:12px;z-index:5;background:#061a40cc;color:#ffd34e;border:1px solid #ffd34e;padding:8px 11px;border-radius:20px;font-size:11px}
+.modal{position:fixed;inset:0;z-index:20;background:#000b;display:grid;place-items:center;padding:18px}
+.modal.hide{display:none}
+.adminBox{width:min(850px,96vw);max-height:92vh;overflow:auto;background:#fff;border-radius:20px;padding:24px;color:#10264b}
+.adminGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.adminTop{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.gold{background:#ffd34e}
+.muted{color:#64748b;font-size:12px}
+.photo-preview{margin-top:10px;text-align:center}
+.photo-preview img{max-width:150px;max-height:150px;border-radius:10px;border:2px solid #ffd34e;display:none}
+@media(max-width:650px){.grid,.choices,.countline,.adminGrid,.excite{grid-template-columns:1fr}.logo{width:170px;height:170px}.card{padding:16px}.wrap{padding:12px 9px 25px}}
+</style>
+</head>
+<body>
 
+<!-- WELCOME SCREEN -->
+<div id="welcome" class="welcome">
+  <div class="welcomeBox">
+    <div class="wave">👋😀</div>
+    <h2>Welcome!</h2>
+    <p>Welcome to the <b>Head of State Award Registration</b>.</p>
+    <h3>🏆 How excited are you?</h3>
+    <div class="excite">
+      <button type="button" data-v="Very Excited">🔥 Very Excited!</button>
+      <button type="button" data-v="Excited">😊 Excited!</button>
+      <button type="button" data-v="A Little Excited">✨ A Little Excited</button>
+    </div>
+    <button id="enter" class="enter" type="button" disabled>🚀 ENTER THE AWARD WEBSITE</button>
+  </div>
+</div>
+
+<!-- ADMINISTRATOR LINK -->
+<a class="adminLink" href="#" id="adminOpen">🔐 Administrator</a>
+
+<!-- ADMINISTRATOR MODAL -->
+<div id="adminModal" class="modal hide">
+  <div class="adminBox">
+    <div class="adminTop">
+      <h2>🔐 Administrator Dashboard</h2>
+      <button type="button" id="adminClose">✕</button>
+    </div>
+    <div id="loginView">
+      <p class="muted">Only the administrator can set the official event countdown.</p>
+      <input id="adminUser" placeholder="Username">
+      <br><br>
+      <input id="adminPass" type="password" placeholder="Password">
+      <br><br>
+      <button type="button" class="gold" id="loginBtn">LOGIN</button>
+      <div id="loginMsg"></div>
+    </div>
+    <div id="dashView" style="display:none">
+      <h3>Official Event Countdown</h3>
+      <div class="adminGrid">
+        <div>
+          <label>Event date & time</label>
+          <input id="adminDate" type="datetime-local">
+        </div>
+        <div>
+          <label>&nbsp;</label>
+          <button type="button" class="gold" id="saveDate">💾 SAVE OFFICIAL COUNTDOWN</button>
+        </div>
+      </div>
+      <p id="saveMsg" class="muted"></p>
+      <h3>Registrations</h3>
+      <div id="regs">Loading...</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN WEBSITE -->
+<div class="wrap">
+<header class="hero">
+  <img class="logo" src="/background.png" alt="Head of State Award">
+  <h1>HEAD OF STATE AWARD</h1>
+  <h2>REGISTRATION</h2>
+  <div class="orn"></div>
+</header>
+
+<section class="card">
+<form id="form">
+<div class="grid">
+  <div><label>👤 FULL NAME *</label><input name="fullName" required placeholder="Enter your full name"></div>
+  <div><label>✉️ EMAIL *</label><input name="email" type="email" required placeholder="example@gmail.com"></div>
+  <div><label>📞 PHONE NUMBER</label><input name="phone" placeholder="0xxxxxxxxx"></div>
+  <div><label>👥 GENDER</label><select name="gender"><option value="">-- Select --</option><option>Male</option><option>Female</option></select></div>
+</div>
+
+<div>
+<label>🏛️ SELECT YOUR DEPARTMENT *</label>
+<select name="department" required>
+<option value="">-- Select Your Department --</option>
+<option>Business Information Technology (BIT)</option>
+<option>Building Construction Technology (BCT)</option>
+<option>Wood Construction Technology (WCT)</option>
+<option>Electricals (EET)</option>
+<option>Hospitality Catering Management (HCM)</option>
+<option>Fashion Design Technology (FDT)</option>
+</select>
+</div>
+
+  <!-- AWARD SELECTION -->
+<div>
+  <label>🏆 SELECT YOUR AWARD *</label>
+
+  <select name="awardSelection" required>
+    <option value="">-- Select Your Award --</option>
+    <option value="Bronze">🥉 Bronze Award</option>
+    <option value="Silver">🥈 Silver Award</option>
+    <option value="Gold">🥇 Gold Award</option>
+  </select>
+</div>
+
+<div class="grid">
+  <div><label>📝 SURNAME</label><input name="surname" placeholder="Enter surname"></div>
+  <div><label>👤 FIRST NAME</label><input name="firstName" placeholder="Enter first name"></div>
+  <div><label>🏠 ADDRESS</label><input name="address" placeholder="Enter address"></div>
+  <div><label>☎️ HOME PHONE</label><input name="homePhone" placeholder="Enter home phone"></div>
+  <div><label>📱 MOBILE PHONE</label><input name="mobilePhone" placeholder="Enter mobile phone"></div>
+  <div><label>🎂 DATE OF BIRTH</label><input name="dateOfBirth" type="date"></div>
+  <div><label>🔢 AGE</label><input name="age" type="number" min="1" max="100" placeholder="Enter age"></div>
+  <div><label>🏆 AWARD UNIT</label><input name="awardUnit" placeholder="Enter award unit"></div>
+</div>
+
+<div><label>📚 PREVIOUS EXPERIENCE</label><select name="previousExperience"><option value="">-- Select --</option><option>Yes</option><option>No</option></select></div>
+<div><label>📖 PREVIOUS EXPERIENCE DETAILS</label><textarea name="previousExperienceDetails" placeholder="Describe your previous experience..."></textarea></div>
+
+<div class="grid">
+  <div><label>👨‍👩‍👦 GUARDIAN NAME</label><input name="guardianName" placeholder="Enter guardian name"></div>
+  <div><label>📞 GUARDIAN CONTACT</label><input name="guardianContact" placeholder="Enter guardian contact"></div>
+</div>
+
+<div>
+<label>📷 PASSPORT PHOTO</label>
+<input name="passportPhoto" type="file" accept="image/*" id="passportPhoto">
+<div class="photo-preview"><img id="photoPreview" alt="Passport photo preview"></div>
+</div>
+
+<div class="ready">
+<h3>🏆 ARE YOU READY FOR THE 🥉 BRONZE AND 🥈 SILVER EXPEDITION?</h3>
+<div class="choices">
+<div><input id="yes" name="ready" value="Yes" type="radio" required><label for="yes">✓ YES<br><small>I'm Ready!</small></label></div>
+<div><input id="no" name="ready" value="No" type="radio"><label for="no">✕ NO<br><small>Not Now</small></label></div>
+<div><input id="maybe" name="ready" value="Maybe" type="radio"><label for="maybe">? MAYBE<br><small>Not Sure Yet</small></label></div>
+</div>
+</div>
+
+<div>
+<label>💬 COMMENT <small>(How excited are you?)</small></label>
+<textarea name="comment" placeholder="Type your comment here..."></textarea>
+</div>
+
+<div class="count">
+<h3>📅 BRONZE &amp; SILVER EXPEDITION COUNTDOWN ✦</h3>
+<div class="countline">
+<div class="unit"><b id="d">00</b><small>DAYS</small></div>
+<div class="unit"><b id="h">00</b><small>HOURS</small></div>
+<div class="unit"><b id="m">00</b><small>MINUTES</small></div>
+<div class="unit"><b id="s">00</b><small>SECONDS</small></div>
+</div>
+<div id="eventText" class="event">The administrator has not published an event date yet.</div>
+</div>
+
+<button type="submit" class="submit">✈️ SUBMIT REGISTRATION ›</button>
+<div id="status" class="status"></div>
+</form>
+</section>
+</div>
+
+<script>
+let token = null;
+let target = null;
+const $ = id => document.getElementById(id);
+
+/* WELCOME SCREEN — select first, then enter */
+document.addEventListener("DOMContentLoaded", () => {
+  const exciteButtons = document.querySelectorAll(".excite button");
+  const enterButton = $("enter");
+  const welcomeScreen = $("welcome");
+
+  enterButton.disabled = true;
+
+  exciteButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      exciteButtons.forEach(x => x.classList.remove("sel"));
+      button.classList.add("sel");
+      enterButton.disabled = false;
+    });
+  });
+
+  enterButton.addEventListener("click", () => {
+    if (!document.querySelector(".excite button.sel")) {
+      alert("Please select how excited you are first.");
+      return;
+    }
+    welcomeScreen.classList.add("hide");
+  });
+});
+
+/* ADMINISTRATOR MODAL */
+$("adminOpen").addEventListener("click", e => {
+  e.preventDefault();
+  $("adminModal").classList.remove("hide");
+});
+
+$("adminClose").addEventListener("click", () => {
+  $("adminModal").classList.add("hide");
+});
+
+/* PASSPORT PHOTO PREVIEW */
+$("passportPhoto").addEventListener("change", function(){
+  const file = this.files[0];
+  const preview = $("photoPreview");
+
+  if(!file){
+    preview.style.display = "none";
+    preview.src = "";
+    return;
+  }
+
+  if(!file.type.startsWith("image/")){
+    alert("Please select an image file.");
+    this.value = "";
+    preview.style.display = "none";
+    preview.src = "";
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    preview.src = e.target.result;
+    preview.style.display = "inline-block";
+  };
+  reader.readAsDataURL(file);
+});
+
+/* LOAD EVENT SETTINGS */
+async function loadSettings(){
+  try{
+    const r = await fetch("/api/settings");
+    const j = await r.json();
+    target = j.eventAt ? new Date(j.eventAt) : null;
+
+    if(target){
+      $("eventText").textContent = "Official event: " + target.toLocaleString();
+    }
+    tick();
+  }catch(error){
+    console.error("Could not load event settings:", error);
+  }
+}
+
+/* COUNTDOWN */
+function tick(){
+  if(!target){
+    ["d","h","m","s"].forEach(x => $(x).textContent = "00");
+    return;
+  }
+
+  let n = target - Date.now();
+  if(n <= 0){
+    n = 0;
+    $("eventText").textContent = "🎉 THE EVENT IS LIVE!";
+  }
+
+  const t = Math.floor(n / 1000);
+  const v = [
+    Math.floor(t / 86400),
+    Math.floor((t % 86400) / 3600),
+    Math.floor((t % 3600) / 60),
+    t % 60
+  ];
+
+  ["d","h","m","s"].forEach((x,i) => {
+    $(x).textContent = String(v[i]).padStart(2,"0");
+  });
+}
+
+setInterval(tick,1000);
+loadSettings();
+
+/* REGISTRATION SUBMISSION */
+$("form").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const form = e.target;
+  const submitButton = form.querySelector(".submit");
+  submitButton.disabled = true;
+  submitButton.textContent = "⏳ SUBMITTING...";
+  $("status").textContent = "";
+
+  try{
+    const data = new FormData(form);
+    const r = await fetch("/api/register", {method:"POST", body:data});
+    const j = await r.json();
+
+    if(r.ok){
+      $("status").textContent = "✓ Registration submitted successfully!";
+      $("status").style.color = "#087443";
+      form.reset();
+      $("photoPreview").style.display = "none";
+      $("photoPreview").src = "";
+    }else{
+      $("status").textContent = "✕ " + (j.error || "Registration failed.");
+      $("status").style.color = "#b42318";
+    }
+  }catch(error){
+    console.error(error);
+    $("status").textContent = "✕ Could not submit registration. Please try again.";
+    $("status").style.color = "#b42318";
+  }
+
+  submitButton.disabled = false;
+  submitButton.textContent = "✈️ SUBMIT REGISTRATION ›";
+});
+
+/* ADMIN LOGIN */
+$("loginBtn").addEventListener("click", async () => {
+  try{
+    const r = await fetch("/api/admin/login", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        username:$("adminUser").value,
+        password:$("adminPass").value
+      })
+    });
+
+    const j = await r.json();
+
+    if(!r.ok){
+      $("loginMsg").textContent = j.error || "Login failed.";
+      return;
+    }
+
+    token = j.token;
+    $("loginView").style.display = "none";
+    $("dashView").style.display = "block";
+    loadAdmin();
+  }catch(error){
+    console.error(error);
+    $("loginMsg").textContent = "Could not connect to administrator service.";
+  }
+});
+
+/* ADMIN API */
+async function api(url,opt={}){
+  opt.headers = {
+    ...(opt.headers || {}),
+    Authorization:"Bearer " + token
+  };
+  return fetch(url,opt);
+}
+
+/* ADMIN DASHBOARD */
+async function loadAdmin(){
+  try{
+    const r = await api("/api/admin/settings");
+    const j = await r.json();
+
+    if(j.eventAt){
+      const d = new Date(j.eventAt);
+      d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+      $("adminDate").value = d.toISOString().slice(0,16);
+    }
+
+    const rr = await api("/api/admin/registrations");
+    const data = await rr.json();
+
+    if(!rr.ok){
+      $("regs").textContent = data.error || "Could not load registrations.";
+      return;
+    }
+
+    if(!Array.isArray(data) || data.length === 0){
+      $("regs").textContent = "No registrations yet.";
+      return;
+    }
+
+    $("regs").innerHTML = data.map((item,i) =>
+      `<div style="padding:10px;border-bottom:1px solid #ddd">
+        <b>${i+1}. ${escapeHtml(item.fullName || "")}</b><br>
+        ${escapeHtml(item.email || "")}
+      </div>`
+    ).join("");
+  }catch(error){
+    console.error(error);
+    $("regs").textContent = "Could not load administrator data.";
+  }
+}
+
+/* SAVE COUNTDOWN */
+$("saveDate").addEventListener("click", async () => {
+  const value = $("adminDate").value;
+
+  if(!value){
+    $("saveMsg").textContent = "Please choose an event date and time.";
+    return;
+  }
+
+  try{
+    const r = await api("/api/admin/settings", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({eventAt:new Date(value).toISOString()})
+    });
+
+    const j = await r.json();
+
+    if(!r.ok){
+      $("saveMsg").textContent = j.error || "Could not save countdown.";
+      return;
+    }
+
+    target = j.eventAt ? new Date(j.eventAt) : new Date(value);
+    $("eventText").textContent = "Official event: " + target.toLocaleString();
+    $("saveMsg").textContent = "✓ Official countdown saved successfully.";
+    tick();
+  }catch(error){
+    console.error(error);
+    $("saveMsg").textContent = "Could not save countdown.";
+  }
+});
+
+/* SAFE DISPLAY OF ADMIN DATA */
+function escapeHtml(value){
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+</script>
+</body>
+                                         </html>
