@@ -149,6 +149,18 @@ button:disabled{cursor:not-allowed}
 </select>
 </div>
 
+  <!-- AWARD SELECTION -->
+<div>
+  <label>🏆 SELECT YOUR AWARD *</label>
+
+  <select name="awardSelection" required>
+    <option value="">-- Select Your Award --</option>
+    <option value="Bronze">🥉 Bronze Award</option>
+    <option value="Silver">🥈 Silver Award</option>
+    <option value="Gold">🥇 Gold Award</option>
+  </select>
+</div>
+
 <div class="grid">
   <div><label>📝 SURNAME</label><input name="surname" placeholder="Enter surname"></div>
   <div><label>👤 FIRST NAME</label><input name="firstName" placeholder="Enter first name"></div>
@@ -158,7 +170,6 @@ button:disabled{cursor:not-allowed}
   <div><label>🎂 DATE OF BIRTH</label><input name="dateOfBirth" type="date"></div>
   <div><label>🔢 AGE</label><input name="age" type="number" min="1" max="100" placeholder="Enter age"></div>
   <div><label>🏆 AWARD UNIT</label><input name="awardUnit" placeholder="Enter award unit"></div>
-  <div><label>🥇 AWARD LEVEL</label><input name="awardLevel" placeholder="Enter award level"></div>
 </div>
 
 <div><label>📚 PREVIOUS EXPERIENCE</label><select name="previousExperience"><option value="">-- Select --</option><option>Yes</option><option>No</option></select></div>
