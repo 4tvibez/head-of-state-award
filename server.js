@@ -2,6 +2,8 @@ const express = require("express");
 const Database = require("better-sqlite3");
 const crypto = require("crypto");
 const path = require("path");
+const fs = require("fs");
+const multer = require("multer");
 
 const app = express();
 
@@ -9,9 +11,7 @@ const db = new Database(
   process.env.DB_FILE || "award.sqlite"
 );
 
-const PORT = Number(
-  process.env.PORT || 3000
-);
+const PORT = Number(process.env.PORT || 3000);
 
 const ADMIN_USER =
   process.env.ADMIN_USER || "admin";
@@ -24,19 +24,102 @@ const SESSION_SECRET =
   crypto.randomBytes(32).toString("hex");
 
 
-/* REQUEST BODY SUPPORT */
+/* ================================
+   UPLOAD DIRECTORY
+================================ */
 
-app.use(express.json({
-  limit: "2mb"
-}));
+const uploadDir =
+  path.join(__dirname, "public", "uploads");
 
-app.use(express.urlencoded({
-  extended: true,
-  limit: "2mb"
-}));
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, {
+    recursive: true
+  });
+}
 
 
-/* DATABASE */
+/* ================================
+   PASSPORT PHOTO UPLOAD
+================================ */
+
+const storage = multer.diskStorage({
+
+  destination: (req, file, cb) => {
+    cb(null, uploadDir);
+  },
+
+  filename: (req, file, cb) => {
+
+    const extension =
+      path.extname(file.originalname)
+        .toLowerCase();
+
+    const uniqueName =
+      "passport-" +
+      Date.now() +
+      "-" +
+      crypto.randomBytes(6).toString("hex") +
+      extension;
+
+    cb(null, uniqueName);
+  }
+
+});
+
+
+const upload = multer({
+
+  storage: storage,
+
+  limits: {
+    fileSize: 2 * 1024 * 1024
+  },
+
+  fileFilter: (req, file, cb) => {
+
+    if (
+      file.mimetype &&
+      file.mimetype.startsWith("image/")
+    ) {
+
+      cb(null, true);
+
+    } else {
+
+      cb(
+        new Error(
+          "Only image files are allowed."
+        )
+      );
+
+    }
+
+  }
+
+});
+
+
+/* ================================
+   BODY PARSING
+================================ */
+
+app.use(
+  express.json({
+    limit: "2mb"
+  })
+);
+
+app.use(
+  express.urlencoded({
+    extended: true,
+    limit: "2mb"
+  })
+);
+
+
+/* ================================
+   DATABASE
+================================ */
 
 db.exec(`
 CREATE TABLE IF NOT EXISTS settings (
@@ -64,7 +147,9 @@ CREATE TABLE IF NOT EXISTS registrations (
 `);
 
 
-/* ADD NEW COLUMNS TO EXISTING DATABASE */
+/* ================================
+   EXISTING DATABASE COLUMNS
+================================ */
 
 const newColumns = [
 
@@ -115,7 +200,9 @@ for (const [name, type] of newColumns) {
 }
 
 
-/* HELPERS */
+/* ================================
+   HELPERS
+================================ */
 
 function now() {
 
@@ -260,7 +347,9 @@ function auth(req, res, next) {
 }
 
 
-/* PUBLIC EVENT SETTINGS */
+/* ================================
+   PUBLIC SETTINGS
+================================ */
 
 app.get(
   "/api/settings",
@@ -292,10 +381,13 @@ app.get(
 );
 
 
-/* REGISTRATION */
+/* ================================
+   REGISTRATION
+================================ */
 
 app.post(
   "/api/register",
+  upload.single("passportPhoto"),
   (req, res) => {
 
     const {
@@ -331,9 +423,7 @@ app.post(
       guardianContact,
 
       guardianConsent,
-      consentDate,
-
-      passportPhoto
+      consentDate
 
     } = req.body || {};
 
@@ -347,6 +437,16 @@ app.post(
       !awardSelection ||
       !ready
     ) {
+
+      if (req.file) {
+
+        try {
+          fs.unlinkSync(
+            req.file.path
+          );
+        } catch {}
+
+      }
 
       return res.status(400).json({
 
@@ -372,6 +472,16 @@ app.post(
         String(awardSelection)
       )
     ) {
+
+      if (req.file) {
+
+        try {
+          fs.unlinkSync(
+            req.file.path
+          );
+        } catch {}
+
+      }
 
       return res.status(400).json({
 
@@ -401,11 +511,19 @@ app.post(
 
       String(firstName || "").length > 120 ||
 
-      String(guardianName || "").length > 160 ||
-
-      String(passportPhoto || "").length > 1400000
+      String(guardianName || "").length > 160
 
     ) {
+
+      if (req.file) {
+
+        try {
+          fs.unlinkSync(
+            req.file.path
+          );
+        } catch {}
+
+      }
 
       return res.status(400).json({
 
@@ -417,145 +535,186 @@ app.post(
     }
 
 
+    /* PHOTO PATH */
+
+    const passportPhoto =
+      req.file
+        ? "/uploads/" + req.file.filename
+        : "";
+
+
     /* SAVE REGISTRATION */
 
-    db.prepare(`
-      INSERT INTO registrations(
+    try {
 
-        full_name,
+      db.prepare(`
+        INSERT INTO registrations(
+
+          full_name,
+          email,
+          phone,
+          gender,
+          department,
+
+          award_selection,
+
+          ready,
+          comment,
+
+          created_at,
+
+          surname,
+          first_name,
+          address,
+
+          home_phone,
+          mobile_phone,
+
+          date_of_birth,
+          age,
+
+          award_unit,
+          award_level,
+
+          previous_experience,
+          previous_experience_details,
+
+          guardian_name,
+          guardian_contact,
+
+          guardian_consent,
+          consent_date,
+
+          passport_photo
+
+        )
+
+        VALUES(
+          ?,
+          ?,
+          ?,
+          ?,
+          ?,
+
+          ?,
+
+          ?,
+          ?,
+
+          ?,
+
+          ?,
+          ?,
+          ?,
+
+          ?,
+          ?,
+
+          ?,
+          ?,
+
+          ?,
+          ?,
+
+          ?,
+          ?,
+
+          ?,
+          ?,
+
+          ?,
+          ?,
+
+          ?
+        )
+
+      `).run(
+
+        fullName,
         email,
-        phone,
-        gender,
+        phone || "",
+        gender || "",
         department,
 
-        award_selection,
+        awardSelection,
 
         ready,
-        comment,
+        comment || "",
 
-        created_at,
+        now(),
 
-        surname,
-        first_name,
-        address,
+        surname || "",
+        firstName || "",
+        address || "",
 
-        home_phone,
-        mobile_phone,
+        homePhone || "",
+        mobilePhone || "",
 
-        date_of_birth,
-        age,
+        dateOfBirth || "",
+        age || "",
 
-        award_unit,
-        award_level,
+        awardUnit || "",
+        awardLevel || "",
 
-        previous_experience,
-        previous_experience_details,
+        previousExperience || "",
+        previousExperienceDetails || "",
 
-        guardian_name,
-        guardian_contact,
+        guardianName || "",
+        guardianContact || "",
 
-        guardian_consent,
-        consent_date,
+        guardianConsent || "",
+        consentDate || "",
 
-        passport_photo
+        passportPhoto
 
-      )
-
-      VALUES(
-        ?,
-        ?,
-        ?,
-        ?,
-        ?,
-
-        ?,
-
-        ?,
-        ?,
-
-        ?,
-
-        ?,
-        ?,
-        ?,
-
-        ?,
-        ?,
-
-        ?,
-        ?,
-
-        ?,
-        ?,
-
-        ?,
-        ?,
-
-        ?,
-        ?,
-
-        ?,
-        ?,
-
-        ?
-      )
-
-    `).run(
-
-      fullName,
-      email,
-      phone || "",
-      gender || "",
-      department,
-
-      awardSelection,
-
-      ready,
-      comment || "",
-
-      now(),
-
-      surname || "",
-      firstName || "",
-      address || "",
-
-      homePhone || "",
-      mobilePhone || "",
-
-      dateOfBirth || "",
-      age || "",
-
-      awardUnit || "",
-      awardLevel || "",
-
-      previousExperience || "",
-      previousExperienceDetails || "",
-
-      guardianName || "",
-      guardianContact || "",
-
-      guardianConsent || "",
-      consentDate || "",
-
-      passportPhoto || ""
-
-    );
+      );
 
 
-    res.json({
+      res.json({
 
-      ok: true,
+        ok: true,
 
-      message:
-        "Registration submitted successfully."
+        message:
+          "Registration submitted successfully."
 
-    });
+      });
+
+
+    } catch (error) {
+
+      console.error(
+        "Registration database error:",
+        error
+      );
+
+
+      if (req.file) {
+
+        try {
+          fs.unlinkSync(
+            req.file.path
+          );
+        } catch {}
+
+      }
+
+
+      res.status(500).json({
+
+        error:
+          "Could not save registration. Please try again."
+
+      });
+
+    }
 
   }
 );
 
 
-/* ADMIN LOGIN */
+/* ================================
+   ADMIN LOGIN
+================================ */
 
 app.post(
   "/api/admin/login",
@@ -615,7 +774,9 @@ app.post(
 );
 
 
-/* ADMIN SETTINGS */
+/* ================================
+   ADMIN SETTINGS
+================================ */
 
 app.get(
   "/api/admin/settings",
@@ -648,7 +809,9 @@ app.get(
 );
 
 
-/* SAVE EVENT DATE */
+/* ================================
+   SAVE EVENT DATE
+================================ */
 
 app.post(
   "/api/admin/settings",
@@ -725,7 +888,9 @@ app.post(
 );
 
 
-/* ADMIN REGISTRATIONS */
+/* ================================
+   ADMIN REGISTRATIONS
+================================ */
 
 app.get(
   "/api/admin/registrations",
@@ -752,6 +917,7 @@ app.get(
           created_at AS createdAt,
 
           surname,
+
           first_name AS firstName,
 
           address,
@@ -765,21 +931,26 @@ app.get(
           award_unit AS awardUnit,
           award_level AS awardLevel,
 
-          previous_experience AS previousExperience,
+          previous_experience
+            AS previousExperience,
 
           previous_experience_details
             AS previousExperienceDetails,
 
-          guardian_name AS guardianName,
+          guardian_name
+            AS guardianName,
 
           guardian_contact
             AS guardianContact,
 
-          guardian_consent AS guardianConsent,
+          guardian_consent
+            AS guardianConsent,
 
-          consent_date AS consentDate,
+          consent_date
+            AS consentDate,
 
-          passport_photo AS passportPhoto
+          passport_photo
+            AS passportPhoto
 
         FROM registrations
 
@@ -796,7 +967,9 @@ app.get(
 );
 
 
-/* STATIC WEBSITE */
+/* ================================
+   STATIC WEBSITE
+================================ */
 
 app.use(
   express.static(
@@ -808,7 +981,68 @@ app.use(
 );
 
 
-/* WEBSITE FALLBACK */
+/* ================================
+   ERROR HANDLER
+================================ */
+
+app.use(
+  (error, req, res, next) => {
+
+    console.error(
+      "Server error:",
+      error
+    );
+
+
+    if (
+      error instanceof multer.MulterError
+    ) {
+
+      if (
+        error.code === "LIMIT_FILE_SIZE"
+      ) {
+
+        return res.status(400).json({
+
+          error:
+            "Passport photo is too large. Maximum size is 2MB."
+
+        });
+
+      }
+
+    }
+
+
+    if (
+      error.message ===
+      "Only image files are allowed."
+    ) {
+
+      return res.status(400).json({
+
+        error:
+          "Please select an image file for the passport photo."
+
+      });
+
+    }
+
+
+    res.status(500).json({
+
+      error:
+        "Something went wrong. Please try again."
+
+    });
+
+  }
+);
+
+
+/* ================================
+   WEBSITE FALLBACK
+================================ */
 
 app.get(
   "*",
@@ -826,7 +1060,9 @@ app.get(
 );
 
 
-/* START SERVER */
+/* ================================
+   START SERVER
+================================ */
 
 app.listen(
   PORT,
