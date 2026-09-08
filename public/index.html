@@ -13,7 +13,7 @@ body{
   font-family:Arial,sans-serif;
   color:#08265a;
   background:#061a40 url('/background.png') center top/cover fixed;
-  min-height:100vh;
+  min-height:100vh
 }
 
 body:after{
@@ -28,14 +28,11 @@ body:after{
   text-shadow:0 0 8px #fff,0 0 20px #ffd34e;
   opacity:.6;
   animation:s 8s ease-in-out infinite;
-  z-index:0;
+  z-index:0
 }
 
 @keyframes s{
-  50%{
-    transform:translateY(-20px);
-    opacity:.25;
-  }
+  50%{transform:translateY(-20px);opacity:.25}
 }
 
 @keyframes shine{
@@ -43,10 +40,7 @@ body:after{
 }
 
 @keyframes pop{
-  from{
-    transform:scale(.96);
-    opacity:0;
-  }
+  from{transform:scale(.96);opacity:0}
 }
 
 .wrap{
@@ -54,12 +48,12 @@ body:after{
   margin:auto;
   padding:18px 18px 35px;
   position:relative;
-  z-index:1;
+  z-index:1
 }
 
 .hero{
   text-align:center;
-  color:#fff;
+  color:#fff
 }
 
 .logo{
@@ -69,7 +63,7 @@ body:after{
   border-radius:50%;
   border:8px solid #fff;
   box-shadow:0 0 0 3px #ffd34e,0 0 45px #ffd34e;
-  margin:auto;
+  margin:auto
 }
 
 .hero h1{
@@ -87,13 +81,13 @@ body:after{
   background-size:250%;
   -webkit-background-clip:text;
   color:transparent;
-  animation:shine 4s linear infinite;
+  animation:shine 4s linear infinite
 }
 
 .hero h2{
   margin:2px 0 10px;
   font-size:clamp(25px,5vw,43px);
-  color:#fff;
+  color:#fff
 }
 
 .orn{
@@ -107,7 +101,7 @@ body:after{
     #fff,
     #ffd34e,
     transparent
-  );
+  )
 }
 
 .card{
@@ -116,20 +110,20 @@ body:after{
   border:2px solid #ffd34e;
   border-radius:25px;
   padding:24px;
-  box-shadow:0 20px 65px #001334aa;
+  box-shadow:0 20px 65px #001334aa
 }
 
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:14px;
+  gap:14px
 }
 
 label{
   font-weight:900;
   font-size:13px;
   display:block;
-  margin:0 0 6px;
+  margin:0 0 6px
 }
 
 input,
@@ -139,28 +133,27 @@ textarea{
   padding:12px;
   border:1px solid #b9c4d4;
   border-radius:9px;
-  font:inherit;
+  font:inherit
 }
 
 input[type=file]{
   background:#fff;
-  cursor:pointer;
+  cursor:pointer
 }
 
 textarea{
-  min-height:80px;
-  resize:vertical;
+  min-height:80px
 }
 
 .ready h3{
   text-align:center;
-  color:#08265a;
+  color:#08265a
 }
 
 .choices{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:10px;
+  gap:10px
 }
 
 .choices label{
@@ -169,16 +162,16 @@ textarea{
   border:1px solid #b9c4d4;
   border-radius:11px;
   cursor:pointer;
-  background:#fff;
+  background:#fff
 }
 
 .choices input{
-  display:none;
+  display:none
 }
 
 .choices input:checked+label{
   box-shadow:0 0 0 3px #ffd34e44;
-  border-color:#ffd34e;
+  border-color:#ffd34e
 }
 
 .count{
@@ -187,19 +180,19 @@ textarea{
   border-radius:17px;
   background:#031b45;
   color:#fff;
-  border:1px solid #ffd34e;
+  border:1px solid #ffd34e
 }
 
 .count h3{
   text-align:center;
   color:#ffd34e;
-  margin:0 0 12px;
+  margin:0 0 12px
 }
 
 .countline{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:9px;
+  gap:9px
 }
 
 .unit{
@@ -207,25 +200,25 @@ textarea{
   padding:12px;
   border:1px solid #078cff;
   border-radius:10px;
-  box-shadow:0 0 17px #008cff33;
+  box-shadow:0 0 17px #008cff33
 }
 
 .unit b{
   font-size:clamp(27px,5vw,42px);
   color:#27a6ff;
   text-shadow:0 0 15px #008cff;
-  display:block;
+  display:block
 }
 
 .unit small{
-  font-weight:900;
+  font-weight:900
 }
 
 .event{
   margin-top:9px;
   text-align:center;
   color:#dceaff;
-  font-size:12px;
+  font-size:12px
 }
 
 button{
@@ -233,11 +226,11 @@ button{
   border-radius:11px;
   padding:14px 18px;
   font-weight:1000;
-  cursor:pointer;
+  cursor:pointer
 }
 
 button:disabled{
-  cursor:not-allowed;
+  cursor:not-allowed
 }
 
 .submit{
@@ -254,13 +247,13 @@ button:disabled{
   );
   background-size:250%;
   animation:shine 3s linear infinite;
-  font-size:18px;
+  font-size:18px
 }
 
 .status{
   text-align:center;
   margin-top:10px;
-  font-weight:900;
+  font-weight:900
 }
 
 .welcome{
@@ -271,11 +264,11 @@ button:disabled{
   backdrop-filter:blur(10px);
   display:grid;
   place-items:center;
-  padding:18px;
+  padding:18px
 }
 
 .welcome.hide{
-  display:none;
+  display:none
 }
 
 .welcomeBox{
@@ -287,44 +280,44 @@ button:disabled{
   padding:35px 25px;
   text-align:center;
   box-shadow:0 0 60px #ffd34e55;
-  animation:pop .45s ease;
+  animation:pop .45s ease
 }
 
 .wave{
-  font-size:50px;
+  font-size:50px
 }
 
 .welcomeBox h2{
   font-size:45px;
   margin:5px;
-  color:#ffd34e;
+  color:#ffd34e
 }
 
 .excite{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:9px;
+  gap:9px
 }
 
 .excite button{
   background:#ffffff12;
   color:#fff;
-  border:1px solid #ffffff44;
+  border:1px solid #ffffff44
 }
 
 .excite button.sel{
   border-color:#ffd34e;
-  background:#ffd34e22;
+  background:#ffd34e22
 }
 
 .enter{
   width:100%;
   margin-top:15px;
-  background:#ffd34e;
+  background:#ffd34e
 }
 
 .enter:disabled{
-  opacity:.4;
+  opacity:.4
 }
 
 .adminLink{
@@ -337,7 +330,7 @@ button:disabled{
   border:1px solid #ffd34e;
   padding:8px 11px;
   border-radius:20px;
-  font-size:11px;
+  font-size:11px
 }
 
 .modal{
@@ -347,11 +340,11 @@ button:disabled{
   background:#000b;
   display:grid;
   place-items:center;
-  padding:18px;
+  padding:18px
 }
 
 .modal.hide{
-  display:none;
+  display:none
 }
 
 .adminBox{
@@ -361,34 +354,34 @@ button:disabled{
   background:#fff;
   border-radius:20px;
   padding:24px;
-  color:#10264b;
+  color:#10264b
 }
 
 .adminGrid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:14px;
+  gap:14px
 }
 
 .adminTop{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:10px;
+  gap:10px
 }
 
 .gold{
-  background:#ffd34e;
+  background:#ffd34e
 }
 
 .muted{
   color:#64748b;
-  font-size:12px;
+  font-size:12px
 }
 
 .photo-preview{
   margin-top:10px;
-  text-align:center;
+  text-align:center
 }
 
 .photo-preview img{
@@ -396,19 +389,7 @@ button:disabled{
   max-height:150px;
   border-radius:10px;
   border:2px solid #ffd34e;
-  display:none;
-}
-
-.reg-card{
-  padding:16px;
-  margin-bottom:14px;
-  border:1px solid #d7dfeb;
-  border-radius:12px;
-  background:#f8fafc;
-}
-
-.reg-card p{
-  margin:7px 0;
+  display:none
 }
 
 .reg-photo{
@@ -416,30 +397,29 @@ button:disabled{
   height:150px;
   object-fit:cover;
   border-radius:10px;
-  border:2px solid #ffd34e;
+  border:2px solid #ffd34e
 }
 
 @media(max-width:650px){
-
   .grid,
   .choices,
   .countline,
   .adminGrid,
   .excite{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr
   }
 
   .logo{
     width:170px;
-    height:170px;
+    height:170px
   }
 
   .card{
-    padding:16px;
+    padding:16px
   }
 
   .wrap{
-    padding:12px 9px 25px;
+    padding:12px 9px 25px
   }
 }
 </style>
@@ -447,12 +427,8 @@ button:disabled{
 
 <body>
 
-<!-- =========================
-WELCOME SCREEN
-========================= -->
-
+<!-- WELCOME SCREEN -->
 <div id="welcome" class="welcome">
-
   <div class="welcomeBox">
 
     <div class="wave">👋😀</div>
@@ -468,21 +444,15 @@ WELCOME SCREEN
 
     <div class="excite">
 
-      <button
-        type="button"
-        data-v="Very Excited">
+      <button type="button" data-v="Very Excited">
         🔥 Very Excited!
       </button>
 
-      <button
-        type="button"
-        data-v="Excited">
+      <button type="button" data-v="Excited">
         😊 Excited!
       </button>
 
-      <button
-        type="button"
-        data-v="A Little Excited">
+      <button type="button" data-v="A Little Excited">
         ✨ A Little Excited
       </button>
 
@@ -492,46 +462,38 @@ WELCOME SCREEN
       id="enter"
       class="enter"
       type="button"
-      disabled>
+      disabled
+    >
       🚀 ENTER THE AWARD WEBSITE
     </button>
 
   </div>
-
 </div>
 
 
-<!-- =========================
-ADMINISTRATOR LINK
-========================= -->
-
+<!-- ADMINISTRATOR LINK -->
 <a
   class="adminLink"
   href="#"
-  id="adminOpen">
+  id="adminOpen"
+>
   🔐 Administrator
 </a>
 
 
-<!-- =========================
-ADMINISTRATOR MODAL
-========================= -->
-
-<div
-  id="adminModal"
-  class="modal hide">
+<!-- ADMINISTRATOR MODAL -->
+<div id="adminModal" class="modal hide">
 
   <div class="adminBox">
 
     <div class="adminTop">
 
-      <h2>
-        🔐 Administrator Dashboard
-      </h2>
+      <h2>🔐 Administrator Dashboard</h2>
 
       <button
         type="button"
-        id="adminClose">
+        id="adminClose"
+      >
         ✕
       </button>
 
@@ -539,30 +501,35 @@ ADMINISTRATOR MODAL
 
 
     <!-- LOGIN -->
-
     <div id="loginView">
 
       <p class="muted">
-        Only the administrator can set the official event countdown.
+        Only the administrator can set the official event countdown
+        and view registrations.
       </p>
 
       <input
         id="adminUser"
-        placeholder="Username">
+        placeholder="Username"
+        autocomplete="username"
+      >
 
       <br><br>
 
       <input
         id="adminPass"
         type="password"
-        placeholder="Password">
+        placeholder="Password"
+        autocomplete="current-password"
+      >
 
       <br><br>
 
       <button
         type="button"
         class="gold"
-        id="loginBtn">
+        id="loginBtn"
+      >
         LOGIN
       </button>
 
@@ -572,14 +539,12 @@ ADMINISTRATOR MODAL
 
 
     <!-- DASHBOARD -->
-
     <div
       id="dashView"
-      style="display:none">
+      style="display:none"
+    >
 
-      <h3>
-        Official Event Countdown
-      </h3>
+      <h3>Official Event Countdown</h3>
 
       <div class="adminGrid">
 
@@ -591,7 +556,8 @@ ADMINISTRATOR MODAL
 
           <input
             id="adminDate"
-            type="datetime-local">
+            type="datetime-local"
+          >
 
         </div>
 
@@ -602,7 +568,8 @@ ADMINISTRATOR MODAL
           <button
             type="button"
             class="gold"
-            id="saveDate">
+            id="saveDate"
+          >
             💾 SAVE OFFICIAL COUNTDOWN
           </button>
 
@@ -612,13 +579,11 @@ ADMINISTRATOR MODAL
 
       <p
         id="saveMsg"
-        class="muted">
-      </p>
+        class="muted"
+      ></p>
 
 
-      <h3>
-        Registrations
-      </h3>
+      <h3>Registrations</h3>
 
       <div id="regs">
         Loading...
@@ -631,10 +596,7 @@ ADMINISTRATOR MODAL
 </div>
 
 
-<!-- =========================
-MAIN WEBSITE
-========================= -->
-
+<!-- MAIN WEBSITE -->
 <div class="wrap">
 
 <header class="hero">
@@ -642,7 +604,8 @@ MAIN WEBSITE
   <img
     class="logo"
     src="/background.png"
-    alt="Head of State Award">
+    alt="Head of State Award"
+  >
 
   <h1>
     HEAD OF STATE AWARD
@@ -661,377 +624,264 @@ MAIN WEBSITE
 
 <form id="form">
 
-<!-- BASIC INFORMATION -->
+  <!-- BASIC INFORMATION -->
+  <div class="grid">
 
-<div class="grid">
+    <div>
+      <label>
+        👤 FULL NAME *
+      </label>
 
+      <input
+        name="fullName"
+        required
+        placeholder="Enter your full name"
+      >
+    </div>
+
+
+    <div>
+      <label>
+        ✉️ EMAIL *
+      </label>
+
+      <input
+        name="email"
+        type="email"
+        required
+        placeholder="example@gmail.com"
+      >
+    </div>
+
+
+    <div>
+      <label>
+        📞 PHONE NUMBER
+      </label>
+
+      <input
+        name="phone"
+        placeholder="0xxxxxxxxx"
+      >
+    </div>
+
+
+    <div>
+      <label>
+        👥 GENDER
+      </label>
+
+      <select name="gender">
+
+        <option value="">
+          -- Select --
+        </option>
+
+        <option>
+          Male
+        </option>
+
+        <option>
+          Female
+        </option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+
+  <!-- DEPARTMENT -->
   <div>
+
     <label>
-      👤 FULL NAME *
+      🏛️ SELECT YOUR DEPARTMENT *
     </label>
 
-    <input
-      name="fullName"
+    <select
+      name="department"
       required
-      placeholder="Enter your full name">
-  </div>
-
-
-  <div>
-    <label>
-      ✉️ EMAIL *
-    </label>
-
-    <input
-      name="email"
-      type="email"
-      required
-      placeholder="example@gmail.com">
-  </div>
-
-
-  <div>
-    <label>
-      📞 PHONE NUMBER
-    </label>
-
-    <input
-      name="phone"
-      placeholder="0xxxxxxxxx">
-  </div>
-
-
-  <div>
-    <label>
-      👥 GENDER
-    </label>
-
-    <select name="gender">
+    >
 
       <option value="">
-        -- Select --
+        -- Select Your Department --
       </option>
 
       <option>
-        Male
+        Business Information Technology (BIT)
       </option>
 
       <option>
-        Female
+        Building Construction Technology (BCT)
+      </option>
+
+      <option>
+        Wood Construction Technology (WCT)
+      </option>
+
+      <option>
+        Electricals (EET)
+      </option>
+
+      <option>
+        Hospitality Catering Management (HCM)
+      </option>
+
+      <option>
+        Fashion Design Technology (FDT)
       </option>
 
     </select>
 
   </div>
 
-</div>
 
-
-<!-- DEPARTMENT -->
-
-<div>
-
-  <label>
-    🏛️ SELECT YOUR DEPARTMENT *
-  </label>
-
-  <select
-    name="department"
-    required>
-
-    <option value="">
-      -- Select Your Department --
-    </option>
-
-    <option>
-      Business Information Technology (BIT)
-    </option>
-
-    <option>
-      Building Construction Technology (BCT)
-    </option>
-
-    <option>
-      Wood Construction Technology (WCT)
-    </option>
-
-    <option>
-      Electricals (EET)
-    </option>
-
-    <option>
-      Hospitality Catering Management (HCM)
-    </option>
-
-    <option>
-      Fashion Design Technology (FDT)
-    </option>
-
-  </select>
-
-</div>
-
-
-<!-- AWARD -->
-
-<div>
-
-  <label>
-    🏆 SELECT YOUR AWARD *
-  </label>
-
-  <select
-    name="awardSelection"
-    required>
-
-    <option value="">
-      -- Select Your Award --
-    </option>
-
-    <option value="Bronze">
-      🥉 Bronze Award
-    </option>
-
-    <option value="Silver">
-      🥈 Silver Award
-    </option>
-
-    <option value="Gold">
-      🥇 Gold Award
-    </option>
-
-  </select>
-
-</div>
-
-
-<!-- PARTICIPANT INFORMATION -->
-
-<div class="grid">
-
+  <!-- AWARD SELECTION -->
   <div>
 
     <label>
-      📝 SURNAME
+      🏆 SELECT YOUR AWARD *
     </label>
 
-    <input
-      name="surname"
-      placeholder="Enter surname">
+    <select
+      name="awardSelection"
+      required
+    >
+
+      <option value="">
+        -- Select Your Award --
+      </option>
+
+      <option value="Bronze">
+        🥉 Bronze Award
+      </option>
+
+      <option value="Silver">
+        🥈 Silver Award
+      </option>
+
+      <option value="Gold">
+        🥇 Gold Award
+      </option>
+
+    </select>
 
   </div>
 
 
-  <div>
+  <!-- PARTICIPANT INFORMATION -->
+  <div class="grid">
 
-    <label>
-      👤 FIRST NAME
-    </label>
+    <div>
+      <label>
+        📝 SURNAME
+      </label>
 
-    <input
-      name="firstName"
-      placeholder="Enter first name">
+      <input
+        name="surname"
+        placeholder="Enter surname"
+      >
+    </div>
+
+
+    <div>
+      <label>
+        👤 FIRST NAME
+      </label>
+
+      <input
+        name="firstName"
+        placeholder="Enter first name"
+      >
+    </div>
+
+
+    <div>
+      <label>
+        🏠 ADDRESS
+      </label>
+
+      <input
+        name="address"
+        placeholder="Enter address"
+      >
+    </div>
+
+
+    <div>
+      <label>
+        ☎️ HOME PHONE
+      </label>
+
+      <input
+        name="homePhone"
+        placeholder="Enter home phone"
+      >
+    </div>
+
+
+    <div>
+      <label>
+        📱 MOBILE PHONE
+      </label>
+
+      <input
+        name="mobilePhone"
+        placeholder="Enter mobile phone"
+      >
+    </div>
+
+
+    <div>
+      <label>
+        🎂 DATE OF BIRTH
+      </label>
+
+      <input
+        name="dateOfBirth"
+        type="date"
+      >
+    </div>
+
+
+    <div>
+      <label>
+        🔢 AGE
+      </label>
+
+      <input
+        name="age"
+        type="number"
+        min="1"
+        max="100"
+        placeholder="Enter age"
+      >
+    </div>
+
+
+    <div>
+      <label>
+        🏆 AWARD UNIT
+      </label>
+
+      <input
+        name="awardUnit"
+        placeholder="Enter award unit"
+      >
+    </div>
 
   </div>
 
 
+  <!-- EXPERIENCE -->
   <div>
 
     <label>
-      🏠 ADDRESS
+      📚 PREVIOUS EXPERIENCE
     </label>
 
-    <input
-      name="address"
-      placeholder="Enter address">
-
-  </div>
-
-
-  <div>
-
-    <label>
-      ☎️ HOME PHONE
-    </label>
-
-    <input
-      name="homePhone"
-      placeholder="Enter home phone">
-
-  </div>
-
-
-  <div>
-
-    <label>
-      📱 MOBILE PHONE
-    </label>
-
-    <input
-      name="mobilePhone"
-      placeholder="Enter mobile phone">
-
-  </div>
-
-
-  <div>
-
-    <label>
-      🎂 DATE OF BIRTH
-    </label>
-
-    <input
-      name="dateOfBirth"
-      type="date">
-
-  </div>
-
-
-  <div>
-
-    <label>
-      🔢 AGE
-    </label>
-
-    <input
-      name="age"
-      type="number"
-      min="1"
-      max="100"
-      placeholder="Enter age">
-
-  </div>
-
-
-  <div>
-
-    <label>
-      🏆 AWARD UNIT
-    </label>
-
-    <input
-      name="awardUnit"
-      placeholder="Enter award unit">
-
-  </div>
-
-</div>
-
-
-<!-- AWARD LEVEL -->
-
-<div>
-
-  <label>
-    🏅 AWARD LEVEL
-  </label>
-
-  <select name="awardLevel">
-
-    <option value="">
-      -- Select Award Level --
-    </option>
-
-    <option>
-      Bronze
-    </option>
-
-    <option>
-      Silver
-    </option>
-
-    <option>
-      Gold
-    </option>
-
-  </select>
-
-</div>
-
-
-<!-- PREVIOUS EXPERIENCE -->
-
-<div>
-
-  <label>
-    📚 PREVIOUS EXPERIENCE
-  </label>
-
-  <select name="previousExperience">
-
-    <option value="">
-      -- Select --
-    </option>
-
-    <option>
-      Yes
-    </option>
-
-    <option>
-      No
-    </option>
-
-  </select>
-
-</div>
-
-
-<div>
-
-  <label>
-    📖 PREVIOUS EXPERIENCE DETAILS
-  </label>
-
-  <textarea
-    name="previousExperienceDetails"
-    placeholder="Describe your previous experience..."></textarea>
-
-</div>
-
-
-<!-- GUARDIAN -->
-
-<div class="grid">
-
-  <div>
-
-    <label>
-      👨‍👩‍👦 GUARDIAN NAME
-    </label>
-
-    <input
-      name="guardianName"
-      placeholder="Enter guardian name">
-
-  </div>
-
-
-  <div>
-
-    <label>
-      📞 GUARDIAN CONTACT
-    </label>
-
-    <input
-      name="guardianContact"
-      placeholder="Enter guardian contact">
-
-  </div>
-
-</div>
-
-
-<!-- GUARDIAN CONSENT -->
-
-<div class="grid">
-
-  <div>
-
-    <label>
-      ✅ GUARDIAN CONSENT
-    </label>
-
-    <select name="guardianConsent">
+    <select name="previousExperience">
 
       <option value="">
         -- Select --
@@ -1053,188 +903,267 @@ MAIN WEBSITE
   <div>
 
     <label>
-      📅 CONSENT DATE
+      📖 PREVIOUS EXPERIENCE DETAILS
+    </label>
+
+    <textarea
+      name="previousExperienceDetails"
+      placeholder="Describe your previous experience..."
+    ></textarea>
+
+  </div>
+
+
+  <!-- GUARDIAN -->
+  <div class="grid">
+
+    <div>
+
+      <label>
+        👨‍👩‍👦 GUARDIAN NAME
+      </label>
+
+      <input
+        name="guardianName"
+        placeholder="Enter guardian name"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label>
+        📞 GUARDIAN CONTACT
+      </label>
+
+      <input
+        name="guardianContact"
+        placeholder="Enter guardian contact"
+      >
+
+    </div>
+
+  </div>
+
+
+  <!-- GUARDIAN CONSENT -->
+  <div class="grid">
+
+    <div>
+
+      <label>
+        ✅ GUARDIAN CONSENT
+      </label>
+
+      <select name="guardianConsent">
+
+        <option value="">
+          -- Select --
+        </option>
+
+        <option value="Yes">
+          Yes
+        </option>
+
+        <option value="No">
+          No
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div>
+
+      <label>
+        📅 CONSENT DATE
+      </label>
+
+      <input
+        name="consentDate"
+        type="date"
+      >
+
+    </div>
+
+  </div>
+
+
+  <!-- PASSPORT PHOTO -->
+  <div>
+
+    <label>
+      📷 PASSPORT PHOTO
     </label>
 
     <input
-      name="consentDate"
-      type="date">
+      name="passportPhoto"
+      type="file"
+      accept="image/*"
+      id="passportPhoto"
+    >
 
-  </div>
+    <div class="photo-preview">
 
-</div>
-
-
-<!-- PASSPORT PHOTO -->
-
-<div>
-
-  <label>
-    📷 PASSPORT PHOTO
-  </label>
-
-  <input
-    name="passportPhoto"
-    type="file"
-    accept="image/*"
-    id="passportPhoto">
-
-  <div class="photo-preview">
-
-    <img
-      id="photoPreview"
-      alt="Passport photo preview">
-
-  </div>
-
-</div>
-
-
-<!-- READY -->
-
-<div class="ready">
-
-  <h3>
-    🏆 ARE YOU READY FOR THE
-    🥉 BRONZE AND
-    🥈 SILVER EXPEDITION?
-  </h3>
-
-  <div class="choices">
-
-    <div>
-
-      <input
-        id="yes"
-        name="ready"
-        value="Yes"
-        type="radio"
-        required>
-
-      <label for="yes">
-        ✓ YES
-        <br>
-        <small>
-          I'm Ready!
-        </small>
-      </label>
-
-    </div>
-
-
-    <div>
-
-      <input
-        id="no"
-        name="ready"
-        value="No"
-        type="radio">
-
-      <label for="no">
-        ✕ NO
-        <br>
-        <small>
-          Not Now
-        </small>
-      </label>
-
-    </div>
-
-
-    <div>
-
-      <input
-        id="maybe"
-        name="ready"
-        value="Maybe"
-        type="radio">
-
-      <label for="maybe">
-        ? MAYBE
-        <br>
-        <small>
-          Not Sure Yet
-        </small>
-      </label>
+      <img
+        id="photoPreview"
+        alt="Passport photo preview"
+      >
 
     </div>
 
   </div>
 
-</div>
+
+  <!-- READY -->
+  <div class="ready">
+
+    <h3>
+      🏆 ARE YOU READY FOR THE
+      🥉 BRONZE AND
+      🥈 SILVER EXPEDITION?
+    </h3>
+
+    <div class="choices">
+
+      <div>
+
+        <input
+          id="yes"
+          name="ready"
+          value="Yes"
+          type="radio"
+          required
+        >
+
+        <label for="yes">
+          ✓ YES
+          <br>
+          <small>
+            I'm Ready!
+          </small>
+        </label>
+
+      </div>
 
 
-<!-- COMMENT -->
+      <div>
 
-<div>
+        <input
+          id="no"
+          name="ready"
+          value="No"
+          type="radio"
+        >
 
-  <label>
-    💬 COMMENT
-    <small>
-      (How excited are you?)
-    </small>
-  </label>
+        <label for="no">
+          ✕ NO
+          <br>
+          <small>
+            Not Now
+          </small>
+        </label>
 
-  <textarea
-    name="comment"
-    placeholder="Type your comment here..."></textarea>
-
-</div>
+      </div>
 
 
-<!-- COUNTDOWN -->
+      <div>
 
-<div class="count">
+        <input
+          id="maybe"
+          name="ready"
+          value="Maybe"
+          type="radio"
+        >
 
-  <h3>
-    📅 BRONZE &amp; SILVER EXPEDITION COUNTDOWN ✦
-  </h3>
+        <label for="maybe">
+          ? MAYBE
+          <br>
+          <small>
+            Not Sure Yet
+          </small>
+        </label>
 
-  <div class="countline">
+      </div>
 
-    <div class="unit">
-      <b id="d">00</b>
-      <small>DAYS</small>
-    </div>
-
-    <div class="unit">
-      <b id="h">00</b>
-      <small>HOURS</small>
-    </div>
-
-    <div class="unit">
-      <b id="m">00</b>
-      <small>MINUTES</small>
-    </div>
-
-    <div class="unit">
-      <b id="s">00</b>
-      <small>SECONDS</small>
     </div>
 
   </div>
+
+
+  <!-- COMMENT -->
+  <div>
+
+    <label>
+      💬 COMMENT
+      <small>
+        (How excited are you?)
+      </small>
+    </label>
+
+    <textarea
+      name="comment"
+      placeholder="Type your comment here..."
+    ></textarea>
+
+  </div>
+
+
+  <!-- COUNTDOWN -->
+  <div class="count">
+
+    <h3>
+      📅 BRONZE &amp; SILVER EXPEDITION COUNTDOWN ✦
+    </h3>
+
+    <div class="countline">
+
+      <div class="unit">
+        <b id="d">00</b>
+        <small>DAYS</small>
+      </div>
+
+      <div class="unit">
+        <b id="h">00</b>
+        <small>HOURS</small>
+      </div>
+
+      <div class="unit">
+        <b id="m">00</b>
+        <small>MINUTES</small>
+      </div>
+
+      <div class="unit">
+        <b id="s">00</b>
+        <small>SECONDS</small>
+      </div>
+
+    </div>
+
+    <div
+      id="eventText"
+      class="event"
+    >
+      The administrator has not published an event date yet.
+    </div>
+
+  </div>
+
+
+  <!-- SUBMIT -->
+  <button
+    type="submit"
+    class="submit"
+  >
+    ✈️ SUBMIT REGISTRATION ›
+  </button>
 
   <div
-    id="eventText"
-    class="event">
-    The administrator has not published an event date yet.
-  </div>
-
-</div>
-
-
-<!-- SUBMIT -->
-
-<button
-  type="submit"
-  class="submit">
-  ✈️ SUBMIT REGISTRATION ›
-</button>
-
-<div
-  id="status"
-  class="status">
-</div>
+    id="status"
+    class="status"
+  ></div>
 
 </form>
 
@@ -1271,9 +1200,7 @@ document.addEventListener(
     const welcomeScreen =
       $("welcome");
 
-
     enterButton.disabled = true;
-
 
     exciteButtons.forEach(
       button => {
@@ -1284,12 +1211,17 @@ document.addEventListener(
 
             exciteButtons.forEach(
               x =>
-                x.classList.remove("sel")
+                x.classList.remove(
+                  "sel"
+                )
             );
 
-            button.classList.add("sel");
+            button.classList.add(
+              "sel"
+            );
 
-            enterButton.disabled = false;
+            enterButton.disabled =
+              false;
 
           }
         );
@@ -1328,7 +1260,7 @@ document.addEventListener(
 
 
 /* =========================
-ADMINISTRATOR MODAL
+ADMIN MODAL
 ========================= */
 
 $("adminOpen").addEventListener(
@@ -1338,7 +1270,8 @@ $("adminOpen").addEventListener(
     e.preventDefault();
 
     $("adminModal")
-      .classList.remove("hide");
+      .classList
+      .remove("hide");
 
   }
 );
@@ -1349,14 +1282,15 @@ $("adminClose").addEventListener(
   () => {
 
     $("adminModal")
-      .classList.add("hide");
+      .classList
+      .add("hide");
 
   }
 );
 
 
 /* =========================
-PASSPORT PHOTO PREVIEW
+PASSPORT PHOTO
 ========================= */
 
 $("passportPhoto").addEventListener(
@@ -1375,7 +1309,8 @@ $("passportPhoto").addEventListener(
       preview.style.display =
         "none";
 
-      preview.src = "";
+      preview.src =
+        "";
 
       return;
 
@@ -1392,12 +1327,14 @@ $("passportPhoto").addEventListener(
         "Please select an image file."
       );
 
-      this.value = "";
+      this.value =
+        "";
 
       preview.style.display =
         "none";
 
-      preview.src = "";
+      preview.src =
+        "";
 
       return;
 
@@ -1405,9 +1342,32 @@ $("passportPhoto").addEventListener(
 
 
     /*
-      The server expects the photo
-      as a data URL inside JSON.
+      The server accepts JSON,
+      so the image will be converted
+      to Base64 before submission.
     */
+
+    if(
+      file.size > 900000
+    ){
+
+      alert(
+        "Passport photo is too large. Please choose a smaller photo."
+      );
+
+      this.value =
+        "";
+
+      preview.style.display =
+        "none";
+
+      preview.src =
+        "";
+
+      return;
+
+    }
+
 
     const reader =
       new FileReader();
@@ -1432,7 +1392,7 @@ $("passportPhoto").addEventListener(
 
 
 /* =========================
-LOAD EVENT SETTINGS
+LOAD SETTINGS
 ========================= */
 
 async function loadSettings(){
@@ -1446,7 +1406,6 @@ async function loadSettings(){
 
     const j =
       await r.json();
-
 
     target =
       j.eventAt
@@ -1485,16 +1444,12 @@ function tick(){
 
   if(!target){
 
-    [
-      "d",
-      "h",
-      "m",
-      "s"
-    ].forEach(
-      x =>
-        $(x).textContent =
-          "00"
-    );
+    ["d","h","m","s"]
+      .forEach(
+        x =>
+          $(x).textContent =
+            "00"
+      );
 
     return;
 
@@ -1502,7 +1457,8 @@ function tick(){
 
 
   let n =
-    target - Date.now();
+    target -
+    Date.now();
 
 
   if(n <= 0){
@@ -1528,63 +1484,9 @@ function tick(){
     ),
 
     Math.floor(
-      (t % 86400) / 3600
+      (t % 86400) /
+      3600
     ),
 
     Math.floor(
-      (t % 3600) / 60
-    ),
-
-    t % 60
-
-  ];
-
-
-  [
-    "d",
-    "h",
-    "m",
-    "s"
-  ].forEach(
-    (x,i) => {
-
-      $(x).textContent =
-        String(
-          v[i]
-        ).padStart(
-          2,
-          "0"
-        );
-
-    }
-  );
-
-}
-
-
-setInterval(
-  tick,
-  1000
-);
-
-
-loadSettings();
-
-
-/* =========================
-REGISTRATION SUBMISSION
-========================= */
-
-$("form").addEventListener(
-  "submit",
-  async e => {
-
-    e.preventDefault();
-
-
-    const form =
-      e.target;
-
-    const submitButton =
-      form.querySelector(
    
