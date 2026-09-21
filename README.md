@@ -1,32 +1,109 @@
-# Head of State Award Registration — Administrator Controlled
+# Head of State Award Registration Website
 
-## What this includes
-- Public registration website with the welcome/excitement screen.
-- Public countdown that reads the official event date from the server.
-- Private administrator login.
-- Administrator dashboard to set the official event date/time.
-- Registration records stored in SQLite.
-- Administrator can view recent registrations.
+A full-stack registration website built for the Head of State Award program. The project combines a responsive public-facing experience with an authenticated administrator area for managing the event countdown and registration records.
 
-## Run locally
-1. Install Node.js 18+.
-2. Open a terminal in this folder.
-3. Run:
-   npm install
-4. Set strong environment variables before starting:
-   - ADMIN_USER
-   - ADMIN_PASSWORD
-   - SESSION_SECRET
-5. Start:
-   npm start
-6. Open:
-   http://localhost:3000
+## ✨ Features
 
-Example (Linux/macOS):
-ADMIN_USER=desmond ADMIN_PASSWORD='CHANGE_THIS_TO_A_LONG_RANDOM_PASSWORD' SESSION_SECRET='USE_A_LONG_RANDOM_SECRET' npm start
+### Public website
+- Welcome and excitement screen before entering the site
+- Responsive registration interface
+- Official event countdown displayed to visitors
+- Participant registration form
+- Clear user-agreement flow
+- Mobile-friendly layout and interactive UI
 
-## Important security note
-Do not publish the default `CHANGE-ME-NOW` password. Use HTTPS when hosting publicly. Put the site behind a reputable host/reverse proxy and keep the SQLite database outside the public web directory. The public page has no controls for changing the countdown; only authenticated admin requests can update it.
+### Administrator area
+- Private administrator login
+- Protected administrator dashboard
+- Administrator-controlled event date and time
+- View recent registration submissions
+- Registration data stored in SQLite
+- Public users cannot change the official countdown
 
-## Deploy
-This is a Node/Express application. It can be deployed to a Node-compatible host. Set the environment variables in the host's secret/environment-variable settings and use `npm start` as the start command.
+## 🛠️ Tech Stack
+
+- HTML5
+- CSS3
+- JavaScript
+- Node.js
+- Express.js
+- SQLite
+- Git & GitHub
+- Railway deployment
+
+## 🎯 What I Built
+
+This project demonstrates practical frontend and full-stack development skills, including:
+
+- Responsive web design
+- Form handling and validation
+- Interactive JavaScript features
+- Backend/API integration
+- Authentication and protected routes
+- Database storage
+- Environment-variable configuration
+- Deployment and troubleshooting
+
+## 📁 Project Structure
+
+- `public/` — public frontend files and assets
+- `server.js` — Express server and backend logic
+- SQLite database — registration data storage
+- `package.json` — project dependencies and start script
+
+## 🚀 Run Locally
+
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Configure environment variables
+
+Set:
+
+- `ADMIN_USER`
+- `ADMIN_PASSWORD`
+- `SESSION_SECRET`
+
+Use strong, private values for production.
+
+### 3. Start the application
+
+```bash
+npm start
+```
+
+Then open:
+
+```
+http://localhost:3000
+```
+
+## ☁️ Deployment
+
+The application is designed for Node-compatible hosting such as Railway.
+
+The production environment should provide the required environment variables through the host's secure variable/secret settings.
+
+## 🔐 Security Notes
+
+- Never commit administrator passwords or session secrets to GitHub.
+- Never publish default credentials.
+- Use HTTPS in production.
+- Keep the SQLite database outside the public web directory.
+- Keep administrator routes protected by authentication.
+
+## 👨‍💻 Developer
+
+**Desmond Nador**  
+Junior Front-End Developer | Web Developer
+
+GitHub: https://github.com/4tvibez
+
+Portfolio: https://4tvibez.github.io/desmond-portfolio/
+
+---
+
+This project is part of my developer portfolio and demonstrates my experience building and deploying practical web applications using HTML, CSS, JavaScript, Node.js, Express, SQLite, GitHub, and Railway.
