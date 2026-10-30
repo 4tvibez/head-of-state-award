@@ -41,7 +41,7 @@ button{border:0;border-radius:11px;padding:14px 18px;font-weight:1000;cursor:poi
 <a class="adminLink" href="#" id="adminOpen">🔐 Administrator</a>
 <div id="adminModal" class="modal hide"><div class="adminBox"><div class="adminTop"><h2>🔐 Administrator Dashboard</h2><button type="button" id="adminClose">✕</button></div>
 <div id="loginView"><p class="muted">Only the administrator can set the official event countdown.</p><input id="adminUser" placeholder="Username"><br><br><input id="adminPass" type="password" placeholder="Password"><br><br><button type="button" class="gold" id="loginBtn">LOGIN</button><div id="loginMsg"></div></div>
-<div id="dashView" style="display:none"><h3>Official Event Countdown</h3><div class="adminGrid"><div><label>Event date & time</label><input id="adminDate" type="datetime-local"></div><div><label>&nbsp;</label><button type="button" class="gold" id="saveDate">💾 SAVE OFFICIAL COUNTDOWN</button></div></div><p id="saveMsg" class="muted"></p><h3>Registrations</h3><div id="regs">Loading...</div></div></div></div>
+<div id="dashView" style="display:none"><h3>Official Event Countdown</h3><div class="adminGrid"><div><label>Event date & time</label><input id="adminDate" type="datetime-local"></div><div><label>&nbsp;</label><button type="button" class="gold" id="saveDate">💾 SAVE OFFICIAL COUNTDOWN</button></div></div><p id="saveMsg" class="muted"></p><div class="adminTop"><h3>Registrations</h3><button type="button" class="gold" id="exportRegs">⬇ DOWNLOAD EXCEL (CSV)</button></div><p class="muted">Export registration details in a spreadsheet file that opens in Excel.</p><div id="regs">Loading...</div></div></div></div>
 
 <div class="wrap"><header class="hero"><img class="logo" src="/background.png" alt="Head of State Award"><h1>HEAD OF STATE AWARD</h1><h2>REGISTRATION</h2><div class="orn"></div></header>
 <section class="card"><form id="form">
@@ -60,7 +60,7 @@ button{border:0;border-radius:11px;padding:14px 18px;font-weight:1000;cursor:poi
 </form></section></div>
 
 <script>
-let token=null,target=null;const $=id=>document.getElementById(id);
+let token=null,target=null,cachedRegistrations=[];const $=id=>document.getElementById(id);
 
 document.addEventListener("DOMContentLoaded",()=>{const buttons=document.querySelectorAll(".excite button"),enter=$("enter");buttons.forEach(b=>b.addEventListener("click",()=>{buttons.forEach(x=>x.classList.remove("sel"));b.classList.add("sel");enter.disabled=false}));enter.addEventListener("click",()=>{$("welcome").classList.add("hide")})});
 $("adminOpen").addEventListener("click",e=>{e.preventDefault();$("adminModal").classList.remove("hide")});
@@ -80,10 +80,42 @@ const r=await fetch("/api/register",{method:"POST",headers:{"Content-Type":"appl
 $("loginBtn").addEventListener("click",async()=>{try{const r=await fetch("/api/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:$("adminUser").value,password:$("adminPass").value})}),j=await r.json();if(!r.ok){$("loginMsg").textContent=j.error||"Login failed.";return}token=j.token;$("loginView").style.display="none";$("dashView").style.display="block";loadAdmin()}catch(e){console.error(e);$("loginMsg").textContent="Could not connect to administrator service."}});
 
 async function api(url,opt={}){opt.headers={...(opt.headers||{}),Authorization:"Bearer "+token};return fetch(url,opt)}
-async function loadAdmin(){try{const r=await api("/api/admin/settings"),j=await r.json();if(j.eventAt){const d=new Date(j.eventAt);d.setMinutes(d.getMinutes()-d.getTimezoneOffset());$("adminDate").value=d.toISOString().slice(0,16)}const rr=await api("/api/admin/registrations"),data=await rr.json();if(!rr.ok){$("regs").textContent=data.error||"Could not load registrations.";return}if(!Array.isArray(data)||!data.length){$("regs").textContent="No registrations yet.";return}
+async function loadAdmin(){try{const r=await api("/api/admin/settings"),j=await r.json();if(j.eventAt){const d=new Date(j.eventAt);d.setMinutes(d.getMinutes()-d.getTimezoneOffset());$("adminDate").value=d.toISOString().slice(0,16)}const rr=await api("/api/admin/registrations"),data=await rr.json();if(!rr.ok){$("regs").textContent=data.error||"Could not load registrations.";return}if(!Array.isArray(data)||!data.length){cachedRegistrations=[];$("regs").textContent="No registrations yet.";return}cachedRegistrations=data;
 $("regs").innerHTML=data.map((item,i)=>{const photo=item.passportPhoto?`<div style="margin-top:12px;text-align:center"><img src="${escapeHtml(item.passportPhoto)}" alt="Passport Photo" style="width:120px;height:150px;object-fit:cover;border-radius:10px;border:2px solid #ffd34e"></div>`:`<div style="margin-top:10px;color:#64748b">No passport photo uploaded.</div>`;return `<div style="padding:16px;margin-bottom:14px;border:1px solid #d7dfeb;border-radius:12px;background:#f8fafc"><h3 style="margin-top:0">${i+1}. ${escapeHtml(item.fullName||"")}</h3>${photo}<p><b>Email:</b> ${escapeHtml(item.email||"")}</p><p><b>Phone:</b> ${escapeHtml(item.phone||"")}</p><p><b>Gender:</b> ${escapeHtml(item.gender||"")}</p><p><b>Department:</b> ${escapeHtml(item.department||"")}</p><p><b>Selected Award:</b> ${escapeHtml(item.awardSelection||"")}</p><p><b>Readiness:</b> ${escapeHtml(item.ready||"")}</p><p><b>Surname:</b> ${escapeHtml(item.surname||"")}</p><p><b>First Name:</b> ${escapeHtml(item.firstName||"")}</p><p><b>Address:</b> ${escapeHtml(item.address||"")}</p><p><b>Home Phone:</b> ${escapeHtml(item.homePhone||"")}</p><p><b>Mobile Phone:</b> ${escapeHtml(item.mobilePhone||"")}</p><p><b>Date of Birth:</b> ${escapeHtml(item.dateOfBirth||"")}</p><p><b>Age:</b> ${escapeHtml(item.age||"")}</p><p><b>Award Unit:</b> ${escapeHtml(item.awardUnit||"")}</p><p><b>Award Level:</b> ${escapeHtml(item.awardLevel||"")}</p><p><b>Previous Experience:</b> ${escapeHtml(item.previousExperience||"")}</p><p><b>Experience Details:</b> ${escapeHtml(item.previousExperienceDetails||"")}</p><p><b>Guardian Name:</b> ${escapeHtml(item.guardianName||"")}</p><p><b>Guardian Contact:</b> ${escapeHtml(item.guardianContact||"")}</p><p><b>Guardian Consent:</b> ${escapeHtml(item.guardianConsent||"")}</p><p><b>Consent Date:</b> ${escapeHtml(item.consentDate||"")}</p><p><b>Comment:</b> ${escapeHtml(item.comment||"")}</p><p class="muted"><b>Registered:</b> ${escapeHtml(item.createdAt||"")}</p></div>`}).join("")}catch(e){console.error(e);$("regs").textContent="Could not load administrator data."}}
 $("saveDate").addEventListener("click",async()=>{const value=$("adminDate").value;if(!value){$("saveMsg").textContent="Please choose an event date and time.";return}try{const r=await api("/api/admin/settings",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({eventAt:new Date(value).toISOString()})}),j=await r.json();if(!r.ok){$("saveMsg").textContent=j.error||"Could not save countdown.";return}target=j.eventAt?new Date(j.eventAt):new Date(value);$("eventText").textContent="Official event: "+target.toLocaleString();$("saveMsg").textContent="✓ Official countdown saved successfully.";tick()}catch(e){console.error(e);$("saveMsg").textContent="Could not save countdown."}});
-function escapeHtml(v){return String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
+
+$("exportRegs").addEventListener("click",()=>{
+  if(!cachedRegistrations.length){$("saveMsg").textContent="There are no registrations to export yet.";return}
+  const columns=[
+    ["Registration ID","id"],["Full Name","fullName"],["Email","email"],["Phone","phone"],
+    ["Gender","gender"],["Department","department"],["Selected Award","awardSelection"],
+    ["Readiness","ready"],["Surname","surname"],["First Name","firstName"],
+    ["Address","address"],["Home Phone","homePhone"],["Mobile Phone","mobilePhone"],
+    ["Date of Birth","dateOfBirth"],["Age","age"],["Award Unit","awardUnit"],
+    ["Previous Experience","previousExperience"],["Experience Details","previousExperienceDetails"],
+    ["Guardian Name","guardianName"],["Guardian Contact","guardianContact"],
+    ["Comment","comment"],["Passport Photo","passportPhoto"],["Registration Date","createdAt"]
+  ];
+  const safe=value=>{
+    let s=String(value??"");
+    if(/^[=+@\\-\\t\\r]/.test(s))s="'"+s;
+    return '"'+s.replace(/"/g,'""')+'"';
+  };
+  const rows=[columns.map(col=>safe(col[0])).join(",")];
+  cachedRegistrations.forEach((item,index)=>{
+    rows.push(columns.map(([label,key])=>{
+      if(key==="id")return safe(item.id??index+1);
+      if(key==="passportPhoto")return safe(item[key]?"Uploaded (view photo in administrator dashboard)":"Not uploaded");
+      return safe(item[key]);
+    }).join(","));
+  });
+  const blob=new Blob(["\\uFEFF"+rows.join("\\r\\n")],{type:"text/csv;charset=utf-8;"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="head-of-state-award-registrations.csv";
+  document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+  $("saveMsg").textContent="✓ Spreadsheet export downloaded. Open the CSV file with Excel.";
+});
+\nfunction escapeHtml(v){return String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
 </script>
 </body>
 </html>
