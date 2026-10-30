@@ -1,109 +1,34 @@
-# Head of State Award Registration Website
+# Head of State Award Registration
 
-A full-stack registration website built for the Head of State Award program. The project combines a responsive public-facing experience with an authenticated administrator area for managing the event countdown and registration records.
+This project runs on Vercel with Supabase as its persistent database. It does not require Railway.
 
-## ✨ Features
+## 1. Create the Supabase database
+1. Create a Supabase project.
+2. Open **SQL Editor** and run the complete contents of `supabase/schema.sql`.
+3. In **Project Settings → API**, copy the Project URL and the **service_role** key. Keep the service-role key private.
 
-### Public website
-- Welcome and excitement screen before entering the site
-- Responsive registration interface
-- Official event countdown displayed to visitors
-- Participant registration form
-- Clear user-agreement flow
-- Mobile-friendly layout and interactive UI
+## 2. Configure Vercel
+In the Vercel project, open **Settings → Environment Variables** and add these for Production (and Preview if needed):
+- `SUPABASE_URL` — your Supabase Project URL
+- `SUPABASE_SERVICE_ROLE_KEY` — your Supabase service_role key
+- `ADMIN_USER` — your chosen administrator username
+- `ADMIN_PASSWORD` — a strong, unique password (do not use the old default)
+- `SESSION_SECRET` — a random secret of at least 32 characters
 
-### Administrator area
-- Private administrator login
-- Protected administrator dashboard
-- Administrator-controlled event date and time
-- View recent registration submissions
-- Registration data stored in SQLite
-- Public users cannot change the official countdown
+Redeploy after adding or changing environment variables.
 
-## 🛠️ Tech Stack
+## 3. Deploy
+Import this GitHub repository into Vercel. Use the repository root (`./`). Vercel should detect the Node application. The `api/index.js` function serves the API and the static files in `public/`.
 
-- HTML5
-- CSS3
-- JavaScript
-- Node.js
-- Express.js
-- SQLite
-- Git & GitHub
-- Railway deployment
+## 4. Test before sharing the QR code
+- Open `/api/health` and confirm `configured: true`.
+- Submit a test registration.
+- Sign in through **Administrator** and confirm the test record appears.
+- Set a test countdown and confirm it appears on the public page.
+- Delete test records from Supabase only after verifying the system.
 
-## 🎯 What I Built
+## Important privacy notes
+This form collects personal details and passport photographs. Keep the Supabase service-role key only in Vercel server environment variables. Do not create public database policies or expose registration records. Use a strong admin password, restrict who can access the Vercel project, and publish an appropriate privacy/consent notice before inviting students to register.
 
-This project demonstrates practical frontend and full-stack development skills, including:
-
-- Responsive web design
-- Form handling and validation
-- Interactive JavaScript features
-- Backend/API integration
-- Authentication and protected routes
-- Database storage
-- Environment-variable configuration
-- Deployment and troubleshooting
-
-## 📁 Project Structure
-
-- `public/` — public frontend files and assets
-- `server.js` — Express server and backend logic
-- SQLite database — registration data storage
-- `package.json` — project dependencies and start script
-
-## 🚀 Run Locally
-
-### 1. Install dependencies
-
-```bash
-npm install
-```
-
-### 2. Configure environment variables
-
-Set:
-
-- `ADMIN_USER`
-- `ADMIN_PASSWORD`
-- `SESSION_SECRET`
-
-Use strong, private values for production.
-
-### 3. Start the application
-
-```bash
-npm start
-```
-
-Then open:
-
-```
-http://localhost:3000
-```
-
-## ☁️ Deployment
-
-The application is designed for Node-compatible hosting such as Railway.
-
-The production environment should provide the required environment variables through the host's secure variable/secret settings.
-
-## 🔐 Security Notes
-
-- Never commit administrator passwords or session secrets to GitHub.
-- Never publish default credentials.
-- Use HTTPS in production.
-- Keep the SQLite database outside the public web directory.
-- Keep administrator routes protected by authentication.
-
-## 👨‍💻 Developer
-
-**Desmond Nador**  
-Junior Front-End Developer | Web Developer
-
-GitHub: https://github.com/4tvibez
-
-Portfolio: https://4tvibez.github.io/desmond-portfolio/
-
----
-
-This project is part of my developer portfolio and demonstrates my experience building and deploying practical web applications using HTML, CSS, JavaScript, Node.js, Express, SQLite, GitHub, and Railway.
+## Local development
+Run `npm install`, set the same environment variables, then run `npm start`.
