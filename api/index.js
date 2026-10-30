@@ -1,5 +1,6 @@
 const express = require("express");
 const crypto = require("crypto");
+const path = require("path");
 
 const app = express();
 app.use(express.json({ limit: "2mb" }));
@@ -137,7 +138,7 @@ app.get("/api/admin/registrations", auth, async (req, res) => {
     res.json(rows.map(row => ({ id: row.id, ...row.data, createdAt: row.created_at })));
   } catch { res.status(500).json({ error: "Could not load registrations." }); }
 });
-app.use(express.static("public"));
-app.get("*", (req, res) => res.sendFile(require("path").join(process.cwd(), "public", "index.html")));
+app.use(express.static(path.join(__dirname, "..", "public")));
+app.get("*", (req, res) => res.sendFile(path.join(__dirname, "..", "public", "index.html")));
 
 module.exports = app;
