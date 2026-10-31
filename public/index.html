@@ -35,8 +35,8 @@ button{border:0;border-radius:11px;padding:14px 18px;font-weight:1000;cursor:poi
 </head>
 <body>
 <div id="welcome" class="welcome"><div class="welcomeBox"><div class="wave">👋😀</div><h2>Welcome!</h2><p>Welcome to the <b>Head of State Award Registration</b>.</p><h3>🏆 How excited are you?</h3><div class="excite">
-<button type="button" data-v="Very Excited">🔥 Very Excited!</button><button type="button" data-v="Excited">😊 Excited!</button><button type="button" data-v="A Little Excited">✨ A Little Excited</button>
-</div><button id="enter" class="enter" type="button" disabled>🚀 ENTER THE AWARD WEBSITE</button></div></div>
+<button type="button" data-v="Very Excited" onclick="selectExcitement(this)">🔥 Very Excited!</button><button type="button" data-v="Excited" onclick="selectExcitement(this)">😊 Excited!</button><button type="button" data-v="A Little Excited" onclick="selectExcitement(this)">✨ A Little Excited</button>
+</div><button id="enter" class="enter" type="button" onclick="enterAwardWebsite()" disabled>🚀 ENTER THE AWARD WEBSITE</button></div></div>
 
 <a class="adminLink" href="#" id="adminOpen">🔐 Administrator</a>
 <div id="adminModal" class="modal hide"><div class="adminBox"><div class="adminTop"><h2>🔐 Administrator Dashboard</h2><button type="button" id="adminClose">✕</button></div>
@@ -62,7 +62,14 @@ button{border:0;border-radius:11px;padding:14px 18px;font-weight:1000;cursor:poi
 <script>
 let token=null,target=null,cachedRegistrations=[];const $=id=>document.getElementById(id);
 
-document.addEventListener("click",e=>{const b=e.target.closest(".excite button");if(b){e.preventDefault();document.querySelectorAll(".excite button").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");$("enter").disabled=false;return}if(e.target.closest("#enter")){$("welcome").classList.add("hide")}});
+function selectExcitement(button){
+  document.querySelectorAll(".excite button").forEach(x=>x.classList.remove("sel"));
+  button.classList.add("sel");
+  $("enter").disabled=false;
+}
+function enterAwardWebsite(){
+  $("welcome").classList.add("hide");
+}
 $("adminOpen").addEventListener("click",e=>{e.preventDefault();$("adminModal").classList.remove("hide")});
 $("adminClose").addEventListener("click",()=>$("adminModal").classList.add("hide"));
 
