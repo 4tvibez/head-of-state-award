@@ -62,7 +62,7 @@ button{border:0;border-radius:11px;padding:14px 18px;font-weight:1000;cursor:poi
 <script>
 let token=null,target=null,cachedRegistrations=[];const $=id=>document.getElementById(id);
 
-document.addEventListener("DOMContentLoaded",()=>{const buttons=document.querySelectorAll(".excite button"),enter=$("enter");buttons.forEach(b=>b.addEventListener("click",()=>{buttons.forEach(x=>x.classList.remove("sel"));b.classList.add("sel");enter.disabled=false}));enter.addEventListener("click",()=>{$("welcome").classList.add("hide")})});
+document.addEventListener("click",e=>{const b=e.target.closest(".excite button");if(b){e.preventDefault();document.querySelectorAll(".excite button").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");$("enter").disabled=false;return}if(e.target.closest("#enter")){$("welcome").classList.add("hide")}});
 $("adminOpen").addEventListener("click",e=>{e.preventDefault();$("adminModal").classList.remove("hide")});
 $("adminClose").addEventListener("click",()=>$("adminModal").classList.add("hide"));
 
